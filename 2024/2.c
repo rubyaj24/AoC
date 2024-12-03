@@ -3,9 +3,10 @@
 #include <string.h>
 
 int checkdifference(int arr[], int size){
+int initdiff = arr[0] - arr[1];
     for(int i = 0; i < size-1; i++){
         int diff = abs(arr[i] - arr[i+1]);
-        if(diff < 1 || diff > 3){
+        if(diff < 1 || diff > 3 || initdiff*diff<0){
             return 0;
         }
     }
