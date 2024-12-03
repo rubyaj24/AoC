@@ -3,16 +3,12 @@
 #include <string.h>
 
 int checkdifference(int arr[], int size){
-    int safe = 0;
-    int unsafe = 0;
     for(int i = 0; i < size-1; i++){
-        if(arr[i]-arr[i+1] > 0 && arr[i]-arr[i+1] <= 3){
-            safe++;
-        }else{
-            unsafe++;
+        if(arr[i]-arr[i+1] <= 0 && arr[i]-arr[i+1] > 3){
+            return 0;
         }
+    return 1;
     }
-    return safe;
 }
 
 int main(){
@@ -25,10 +21,18 @@ int main(){
     int arr[10];
     int size = 0;
     int safe = 0;
-    int unsafe = 0;
-    while(fscanf(file,"%d",&arr[size]) == 1){
-        size++;
-    }
+        while(fscanf(file,"%d",&arr[size]) == 1){
+            size++;
+            int ch = getc(file);
+            if (ch == '\n' || ch == EOF){
+                safe += checkdifference(arr, size);
+                size = 0;
+            }
+            if(ch == EOF){
+                break;
+            }
+        }
+    printf("Safe: %d\n",safe);
     fclose(file);
     return 0;
 }
